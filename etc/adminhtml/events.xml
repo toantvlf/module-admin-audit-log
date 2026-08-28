@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- Fires after every admin controller action dispatches — see Observer/LogAdminAction,
+         which guards on Model\Config::isEnabled(), the login/logout controllers, and (unless
+         opted in) GET requests before writing anything. -->
+    <event name="controller_action_postdispatch_adminhtml">
+        <observer name="tvtcommerce_adminauditlog_log_admin_action"
+                  instance="TVTCommerce\AdminAuditLog\Observer\LogAdminAction"/>
+    </event>
+</config>

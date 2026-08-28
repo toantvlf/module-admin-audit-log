@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="tvtcommerce" translate="label" sortOrder="200">
+            <label>TVTCommerce</label>
+        </tab>
+
+        <section id="tvtcommerce_admin_audit_log" translate="label" type="text" sortOrder="120"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Admin Audit Log</label>
+            <tab>tvtcommerce</tab>
+            <resource>TVTCommerce_AdminAuditLog::config</resource>
+
+            <!-- ── General ── -->
+            <group id="general" translate="label" type="text" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Audit Log</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="retention_days" translate="label" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Retention (Days)</label>
+                    <validate>validate-number validate-greater-than-zero</validate>
+                    <comment>Log entries older than this are deleted by the daily cleanup cron. Default: 90.</comment>
+                </field>
+                <field id="log_get_requests" translate="label" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log Read-Only (GET) Requests</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Off by default: only state-changing POST actions are logged, to keep the log focused and small. Turning this on also logs read-only page views.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,21 @@
+{
+    "tvt_admin_audit_log": {
+        "column": {
+            "log_id": true,
+            "admin_user_id": true,
+            "admin_username": true,
+            "full_action_name": true,
+            "request_method": true,
+            "params": true,
+            "ip": true,
+            "created_at": true
+        },
+        "index": {
+            "TVT_ADMIN_AUDIT_LOG_ADMIN_USER_ID": true,
+            "TVT_ADMIN_AUDIT_LOG_CREATED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,98 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_components.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">tvt_admin_audit_log_listing.tvt_admin_audit_log_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>tvt_admin_audit_log_columns</spinner>
+        <deps>
+            <dep>tvt_admin_audit_log_listing.tvt_admin_audit_log_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="tvt_admin_audit_log_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">TVTCommerce_AdminAuditLog_LogDataProvider</argument>
+            <argument name="name" xsi:type="string">tvt_admin_audit_log_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">log_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <filters name="listing_filters"/>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <url path="tvt_admin_audit_log/log/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                    <confirm>
+                        <title translate="true">Delete log entries</title>
+                        <message translate="true">Are you sure you want to delete the selected log entries? This cannot be undone.</message>
+                    </confirm>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="tvt_admin_audit_log_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>log_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="log_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" sortOrder="20">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Date</label>
+            </settings>
+        </column>
+        <column name="admin_username" sortOrder="30">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Admin User</label>
+            </settings>
+        </column>
+        <column name="full_action_name" sortOrder="40">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Action</label>
+            </settings>
+        </column>
+        <column name="request_method" sortOrder="50">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Method</label>
+            </settings>
+        </column>
+        <column name="ip" sortOrder="60">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">IP Address</label>
+            </settings>
+        </column>
+        <column name="params" sortOrder="70">
+            <settings>
+                <label translate="true">Changed Fields</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

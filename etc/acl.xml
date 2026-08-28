@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="TVTCommerce_AdminAuditLog::root" title="TVT Admin Audit Log" sortOrder="100">
+                    <resource id="TVTCommerce_AdminAuditLog::view" title="View Log" sortOrder="10"/>
+                    <resource id="TVTCommerce_AdminAuditLog::manage" title="Clear Log Entries" sortOrder="20"/>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="TVTCommerce_AdminAuditLog::config" title="TVT Admin Audit Log Configuration"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

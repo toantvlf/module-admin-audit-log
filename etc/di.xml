@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!--
+        Log admin grid data source (view/adminhtml/ui_component/tvt_admin_audit_log_listing.xml).
+
+        Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider has NO "collection"
+        constructor argument (it works over Api\Search\ReportingInterface, not a raw collection) —
+        an argument by that name here is silently ignored, not an error. THIS is the exact root
+        cause of the live "Not registered handle tvt_admin_audit_log_listing_data_source" error:
+        Reporting::search() delegates to the SHARED, singleton
+        Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory, which throws
+        that exact message unless this exact data-source name is registered in ITS "collections"
+        array — see the <type> declaration below (verified directly against vendor/magento/
+        framework's real source: DataProvider.php, Reporting.php, CollectionFactory.php).
+    -->
+    <virtualType name="TVTCommerce_AdminAuditLog_LogDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="tvt_admin_audit_log_listing_data_source" xsi:type="string">TVTCommerce\AdminAuditLog\Model\ResourceModel\AuditLog\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

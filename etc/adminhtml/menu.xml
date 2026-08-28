@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="TVTCommerce_AdminAuditLog::root_menu"
+             title="Admin Audit Log"
+             module="TVTCommerce_AdminAuditLog"
+             sortOrder="65"
+             resource="TVTCommerce_AdminAuditLog::root"/>
+        <add id="TVTCommerce_AdminAuditLog::log"
+             title="Log"
+             module="TVTCommerce_AdminAuditLog"
+             sortOrder="10"
+             parent="TVTCommerce_AdminAuditLog::root_menu"
+             action="tvt_admin_audit_log/log/index"
+             resource="TVTCommerce_AdminAuditLog::view"/>
+        <add id="TVTCommerce_AdminAuditLog::config_link"
+             title="Settings"
+             module="TVTCommerce_AdminAuditLog"
+             sortOrder="20"
+             parent="TVTCommerce_AdminAuditLog::root_menu"
+             action="adminhtml/system_config/edit/section/tvtcommerce_admin_audit_log"
+             resource="TVTCommerce_AdminAuditLog::config"/>
+    </menu>
+</config>

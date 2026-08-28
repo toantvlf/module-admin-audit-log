@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="tvt_admin_audit_log" resource="default" engine="innodb"
+           comment="TVT Admin Audit Log — records admin panel actions">
+        <column xsi:type="int" name="log_id" unsigned="true" nullable="false" identity="true" comment="Log ID"/>
+        <column xsi:type="int" name="admin_user_id" unsigned="true" nullable="true"
+                comment="Admin User ID (nullable — the acting admin may have since been deleted)"/>
+        <column xsi:type="varchar" name="admin_username" nullable="false" length="128"
+                comment="Admin Username (denormalized so the grid still shows a name after the admin user record is gone)"/>
+        <column xsi:type="varchar" name="full_action_name" nullable="false" length="191"
+                comment="Full Action Name, e.g. catalog_product_save"/>
+        <column xsi:type="varchar" name="request_method" nullable="false" length="8" comment="Request Method (GET/POST)"/>
+        <column xsi:type="text" name="params" nullable="true" comment="Sanitized Request Params (JSON, truncated)"/>
+        <column xsi:type="varchar" name="ip" nullable="false" length="45" comment="IP Address (long enough for IPv6)"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="log_id"/>
+        </constraint>
+        <index referenceId="TVT_ADMIN_AUDIT_LOG_ADMIN_USER_ID" indexType="btree">
+            <column name="admin_user_id"/>
+        </index>
+        <index referenceId="TVT_ADMIN_AUDIT_LOG_CREATED_AT" indexType="btree">
+            <column name="created_at"/>
+        </index>
+    </table>
+</schema>
